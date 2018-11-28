@@ -1,55 +1,30 @@
 var mongoose = require("mongoose");
-var db = require("./db/mongoDB/MongoDB");
 var Film = require("./db/mongoDB/models/films");
 var User = require("./db/mongoDB/models/users");
 var Rental = require("./db/mongoDB/models/rental");
 
-
-getAllFilm_time = function () {
+exports.getTimeFindAll = function (callback) {
     setTimeout(() => {
         beginTime = new Date().getTime();
         Film.find(function (err, Films) {
-            if (err) return console.error(err);
             endTime = new Date().getTime();
-            return endTime - beginTime
+            callback(err, endTime - beginTime)
         });
     }, 3000);
 }
 
-
-getAFilm_time = function() {
+exports.getTimeFindOne = function(callback) {
     setTimeout(() => {
         beginTime = new Date().getTime();
         Film.find({name: "Vqaqe Qbozm"} ,function (err, result) {
-            if (err) return console.error(err);
             endTime = new Date().getTime();
-            return endTime - beginTime
+            callback(err, endTime - beginTime)
         });
     }, 3000);
 }
 
-createRental = function() {
+exports.createRental = function() {
     setTimeout(() => {
-        // Film.find({name: "Vqaqe Qbozm"}, function(err, film) {
-        //     if (err) return console.error(err);
-        //     console.log(film);
-        //     User.find({firstname: "Se Sge"}, function(err, user) {
-        //         if (err) return console.error(err);
-        //         console.log(user);
-
-        //         rental = new Rental({
-        //             status: true,
-        //             user: user._id,
-        //             film: film._id
-        //         });
-
-        //         console.log(rental);
-        //         rental.save(function (err) {
-        //             if (err) console.log(err)
-        //         })
-        //     })
-        // })
-
         var film = new Film({
             _id: new mongoose.Types.ObjectId(),
             name: "Duong",
@@ -62,7 +37,7 @@ createRental = function() {
 
             var user = new User({
                 _id: new mongoose.Types.ObjectId(),
-                fisrtname: "Duong Nguyen",
+                firstname: "Duong Nguyen",
                 lastname: "Van",
                 age: 18,
                 email: "vanduo@asd.co"
@@ -73,8 +48,8 @@ createRental = function() {
 
                 var rental = new Rental({
                     status: true,
-                    user: user._id,
-                    film: film._id
+                    users: user._id,
+                    films: film._id
                 })
 
                 rental.save(function(err) {
@@ -88,3 +63,63 @@ createRental = function() {
     }, 3000)
 }
 
+exports.getTimePopulateTwoCollection = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        Rental.find().populate("users").exec(function(err, rentals) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    }, 3000)
+}
+
+exports.getTimePopulateThreeCollection = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        Rental.find().populate("users").populate("films").exec(function(err, rentals) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    }, 3000)
+    
+}
+
+exports.getTimeUpdateOne = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        User.updateOne({firstname: "Duong Nguyen"}, {firstname: "Duongdz"}, function(err) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    })
+}
+
+exports.getTimeUpdateMany = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        User.updateMany({age: {$lt: 18}}, {firstname: "em chua 18"}, function(err) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    })
+}
+
+exports.getTimeDeleteOne = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        User.deleteOne({firstname: "Duongdz"}, function(err, c) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    })
+}
+
+exports.getTimeCount = function(callback) {
+    setTimeout(() => {
+        beginTime = new Date().getTime();
+        Rental.count(function(err, c) {
+            endTime = new Date().getTime();
+            callback(err, endTime - beginTime);
+        })
+    })
+}
