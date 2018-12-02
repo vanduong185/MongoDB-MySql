@@ -10,7 +10,7 @@
 
 <body ng-app="app">
   <div ng-controller="AppController" style="display: flex; flex-direction: column; width: 100vw; padding: 100px; align-items: center; ">
-    <h1 style="margin-bottom: 30px">So sánh hiệu năng MongoDB vs MySQL</h1>
+    <h1 style="margin-bottom: 30px">So sánh hiệu năng MongoDB vs MySQL<small> (đơn vị: ms)</small></h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -26,9 +26,9 @@
           <td>{{mysql_data.timeFindOne}}</td>
           <td>{{mongo_data.timeFindOne}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait1" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait11 || wait12" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="findOne()">
-              {{wait1 ? "Đang tiến hành" : "So sánh"}}
+              {{wait11 || wait12 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -37,9 +37,9 @@
           <td>{{mysql_data.timeFindAll}}</td>
           <td>{{mongo_data.timeFindAll}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait2" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait21 || wait22" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="findAll()">
-              {{wait2 ? "Đang tiến hành" : "So sánh"}}
+              {{wait21 || wait22 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -48,9 +48,9 @@
           <td>{{mysql_data.timeUpdateOne}}</td>
           <td>{{mongo_data.timeUpdateOne}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait3" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait31 || wait32" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="updateOne()">
-              {{wait3 ? "Đang tiến hành" : "So sánh"}}
+              {{wait31 || wait32 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -59,9 +59,9 @@
           <td>{{mysql_data.timeUpdateMany}}</td>
           <td>{{mongo_data.timeUpdateMany}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait4" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait41 || wait42" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="updateMany()">
-              {{wait4 ? "Đang tiến hành" : "So sánh"}}
+              {{wait41 || wait42 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -70,9 +70,9 @@
           <td>{{mysql_data.timeDeleteOne}}</td>
           <td>{{mongo_data.timeDeleteOne}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait5" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait51 || wait52" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="deleteOne()">
-              {{wait5 ? "Đang tiến hành" : "So sánh"}}
+              {{wait51 || wait52 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -81,9 +81,9 @@
           <td>{{mysql_data.timeDeleteMany}}</td>
           <td>{{mongo_data.timeDeleteMany}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait6" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait61 || wait62" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="deleteMany()">
-              {{wait6 ? "Đang tiến hành" : "So sánh"}}
+              {{wait61 || wait62 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -92,9 +92,9 @@
           <td>{{mysql_data.timeJoin2}}</td>
           <td>{{mongo_data.timeJoin2}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait7" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait71 || wait72" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="join2()">
-              {{wait7 ? "Đang tiến hành" : "So sánh"}}
+              {{wait71 || wait72 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -103,9 +103,9 @@
           <td>{{mysql_data.timeJoin3}}</td>
           <td>{{mongo_data.timeJoin3}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait8" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait81 || wait82" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="join3()">
-              {{wait8 ? "Đang tiến hành" : "So sánh"}}
+              {{wait81 || wait82? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>
@@ -114,9 +114,9 @@
           <td>{{mysql_data.timeCount}}</td>
           <td>{{mongo_data.timeCount}}</td>
           <td>
-            <button class="btn btn-md" ng-disabled="wait9" style="background-color: limegreen; color: #fff; font-weight: bold;"
+            <button class="btn btn-md" ng-disabled="wait91 || wait92" style="background-color: limegreen; color: #fff; font-weight: bold;"
               ng-click="count()">
-              {{wait9 ? "Đang tiến hành" : "So sánh"}}
+              {{wait91 || wait92 ? "Đang tiến hành" : "So sánh"}}
             </button>
           </td>
         </tr>

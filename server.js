@@ -1,4 +1,6 @@
-var db = require("./db/mongoDB/MongoDB");
+var dbM = require("./db/mongoDB/MongoDB");
+var dbS = require("./db/mysql/mysql");
+var appMysql = require("./app_mySQL");
 var appMongo = require("./app_mongoDB");
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -13,154 +15,207 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + "/public/views/index.html");
 });
 
-app.get("/findOne", function (req, res) {
+app.get("/mongo/findOne", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeFindOne(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeFindOne(function (time) {
         mongo_data.timeFindOne = time;
-        mysql_data.timeFindOne = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/findAll", function (req, res) {
+app.get("/mongo/findAll", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeFindAll(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeFindAll(function (time) {
         mongo_data.timeFindAll = time;
-        mysql_data.timeFindAll = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/updateOne", function (req, res) {
+app.get("/mongo/updateOne", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeUpdateOne(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeUpdateOne(function (time) {
         mongo_data.timeUpdateOne = time;
-        mysql_data.timeUpdateOne = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/updateMany", function (req, res) {
+app.get("/mongo/updateMany", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeUpdateMany(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeUpdateMany(function (time) {
         mongo_data.timeUpdateMany = time;
-        mysql_data.timeUpdateMany = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/deleteOne", function (req, res) {
+app.get("/mongo/deleteOne", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeDeleteOne(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeDeleteOne(function (time) {
         mongo_data.timeDeleteOne = time;
-        mysql_data.timeDeleteOne = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/deleteMany", function (req, res) {
+app.get("/mongo/deleteMany", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimeDeleteMany(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimeDeleteMany(function (time) {
         mongo_data.timeDeleteMany = time;
-        mysql_data.timeDeleteMany = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/join2", function (req, res) {
+app.get("/mongo/join2", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimePopulateTwoCollection(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimePopulateTwoCollection(function (time) {
         mongo_data.timeJoin2 = time;
-        mysql_data.timeJoin2 = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
-            mysql_data: mysql_data
+            mongo_data: mongo_data
         })
     })
 })
 
-app.get("/join3", function (req, res) {
+app.get("/mongo/join3", function (req, res) {
     mongo_data = {};
-    mysql_data = {};
-    appMongo.getTimePopulateThreeCollection(function (err, time) {
-        if (err) console.log(err)
-
+    appMongo.getTimePopulateThreeCollection(function (time) {
         mongo_data.timeJoin3 = time;
-        mysql_data.timeJoin3 = 3525;
-
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
+            mongo_data: mongo_data
+        })
+    })
+})
+
+app.get("/mongo/count", function (req, res) {
+    mongo_data = {};
+    appMongo.getTimeCount(function (time) {
+        mongo_data.timeCount = time;
+        res.status(200).json({
+            message: "OK",
+            mongo_data: mongo_data
+        })
+    })
+})
+
+app.get("/mysql/findOne", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeFindOne(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeFindOne = time;
+        res.status(200).json({
+            message: "OK",
             mysql_data: mysql_data
         })
     })
 })
 
-app.get("/count", function (req, res) {
-    mongo_data = {};
+app.get("/mysql/findAll", function (req, res) {
     mysql_data = {};
-    appMongo.getTimeCount(function (err, time) {
-        if (err) console.log(err)
-
-        mongo_data.timeCount = time;
-        mysql_data.timeCount = 3525;
-
+    appMysql.getTimeFindAll(function (time) {
+        mysql_data.timeFindAll = time;
         res.status(200).json({
             message: "OK",
-            mongo_data: mongo_data,
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/updateOne", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeUpdateOne(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeUpdateOne = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/updateMany", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeUpdateMany(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeUpdateMany = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/deleteOne", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeDeleteOne(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeDeleteOne = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/deleteMany", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeDeleteMany(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeDeleteMany = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/join2", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeJoin2(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeJoin2 = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/join3", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeJoin3(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeJoin3 = time;
+        res.status(200).json({
+            message: "OK",
+            mysql_data: mysql_data
+        })
+    })
+})
+
+app.get("/mysql/count", function (req, res) {
+    mysql_data = {};
+    appMysql.getTimeCount(function (err, time) {
+        if (err) console.log(err)
+        mysql_data.timeCount = time;
+        res.status(200).json({
+            message: "OK",
             mysql_data: mysql_data
         })
     })
