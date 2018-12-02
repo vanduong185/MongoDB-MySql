@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>MongoDB - MySql</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body ng-app="app">
+  <div ng-controller="AppController" style="display: flex; flex-direction: column; width: 100vw; padding: 100px; align-items: center; ">
+    <h1 style="margin-bottom: 30px">So sánh hiệu năng MongoDB vs MySQL</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">MySQL</th>
+          <th scope="col">MongoDB</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tìm kiếm một bản ghi</td>
+          <td>{{mysql_data.timeFindOne}}</td>
+          <td>{{mongo_data.timeFindOne}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait1" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="findOne()">
+              {{wait1 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Chọn tất cả bản ghi</td>
+          <td>{{mysql_data.timeFindAll}}</td>
+          <td>{{mongo_data.timeFindAll}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait2" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="findAll()">
+              {{wait2 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Cập nhật một bản ghi</td>
+          <td>{{mysql_data.timeUpdateOne}}</td>
+          <td>{{mongo_data.timeUpdateOne}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait3" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="updateOne()">
+              {{wait3 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Cập nhật nhiều bản ghi</td>
+          <td>{{mysql_data.timeUpdateMany}}</td>
+          <td>{{mongo_data.timeUpdateMany}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait4" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="updateMany()">
+              {{wait4 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Xóa một bản ghi</td>
+          <td>{{mysql_data.timeDeleteOne}}</td>
+          <td>{{mongo_data.timeDeleteOne}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait5" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="deleteOne()">
+              {{wait5 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Xóa nhiều bản ghi</td>
+          <td>{{mysql_data.timeDeleteMany}}</td>
+          <td>{{mongo_data.timeDeleteMany}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait6" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="deleteMany()">
+              {{wait6 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Nối 2 bảng</td>
+          <td>{{mysql_data.timeJoin2}}</td>
+          <td>{{mongo_data.timeJoin2}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait7" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="join2()">
+              {{wait7 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Nối 3 bảng</td>
+          <td>{{mysql_data.timeJoin3}}</td>
+          <td>{{mongo_data.timeJoin3}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait8" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="join3()">
+              {{wait8 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Đếm số bản ghi</td>
+          <td>{{mysql_data.timeCount}}</td>
+          <td>{{mongo_data.timeCount}}</td>
+          <td>
+            <button class="btn btn-md" ng-disabled="wait9" style="background-color: limegreen; color: #fff; font-weight: bold;"
+              ng-click="count()">
+              {{wait9 ? "Đang tiến hành" : "So sánh"}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="node_modules/angular/angular.min.js" type="text/javascript"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="public/views/app.js" type="text/javascript"></script>
+</body>
+
+</html>

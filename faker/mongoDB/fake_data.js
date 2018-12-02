@@ -7,8 +7,8 @@ var user = require("../../db/mongoDB/models/users");
 var rental = require("../../db/mongoDB/models/rental");
 
 var importData = function () {
-  var stream = fsex.createReadStream("fake_data_film.csv");
-
+  var stream = fsex.createReadStream("../../../../data/fake_data_film.csv");
+  begin_time = new Date().getTime();
   csv.fromStream(stream, {
     headers: [
       "id",
@@ -26,8 +26,10 @@ var importData = function () {
       if (err) console.log(err)
     })
   })
+  end_time = new Date().getTime();
+  console.log(end_time - begin_time);
 
-  // var stream = fsex.createReadStream("fake_data_user.csv");
+  // var stream = fsex.createReadStream("../../../../data/fake_data_user.csv");
 
   // csv.fromStream(stream, {headers : [
   //   "id",
@@ -48,36 +50,36 @@ var importData = function () {
   // })
 }
 
-//importData();
+importData();
 
 // film.count(function(err, c) {
 //   console.log(c);
 // })
 
-fake_rental = function () {
-  setTimeout(() => {
-    user.find().limit(10).exec(function (err, users) {
-      if (err) console.log(err)
+// fake_rental = function () {
+//   setTimeout(() => {
+//     user.find().limit(10).exec(function (err, users) {
+//       if (err) console.log(err)
 
-      film.find().limit(50).exec(function (err, films) {
-        if (err) console.log(err)
+//       film.find().limit(50).exec(function (err, films) {
+//         if (err) console.log(err)
 
-        for (i = 0; i < users.length; i++) {
-          for (j = 0; j < 5 * (i + 1); j++) {
-            var ren = new rental({
-              status: true,
-              users: new mongoose.Types.ObjectId(users[i]._id),
-              films: new mongoose.Types.ObjectId(films[j]._id)
-            })
+//         for (i = 0; i < users.length; i++) {
+//           for (j = 0; j < 5 * (i + 1); j++) {
+//             var ren = new rental({
+//               status: true,
+//               users: new mongoose.Types.ObjectId(users[i]._id),
+//               films: new mongoose.Types.ObjectId(films[j]._id)
+//             })
 
-            ren.save();
-          }
-        }
+//             ren.save();
+//           }
+//         }
 
-        console.log("done")
-      })
-    });
-  }, 3000)
-}
+//         console.log("done")
+//       })
+//     });
+//   }, 3000)
+// }
 
-fake_rental();
+// fake_rental();
